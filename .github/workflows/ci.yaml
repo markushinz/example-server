@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "16.9.1"
+          node-version: "17.0.1"
       - name: Version
         run: |
           export VERSION=$(./version.sh)
@@ -39,8 +39,11 @@ jobs:
             linux/amd64
             linux/arm64
           tags: |
-            markushinz/example-server:latest
             markushinz/example-server:v${{ env.VERSION }}
+            markushinz/example-server:latest
       - name: Release
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         run: GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}" gh release create "v${VERSION}" --title "v${VERSION}" --notes "v${VERSION}"
+      - name: Deploy
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        run: GITHUB_TOKEN="${{ secrets.TU_TOKEN }}" gh workflow run -R "${{ secrets.DEPLOY_REPO }}" cd.yaml -f "repository=markushinz/example-server" -f "tag=v${VERSION}"
