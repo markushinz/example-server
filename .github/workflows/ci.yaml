@@ -47,6 +47,3 @@ jobs:
       - name: Release
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         run: GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}" gh release create "v${VERSION}" --generate-notes
-      - name: Deploy
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        run: GITHUB_TOKEN="${{ secrets.TU_TOKEN }}" gh workflow run -R "${{ secrets.DEPLOY_REPO }}" cd -f "repository=markushinz/example-server" -f "tag=v${VERSION}" -f "merge=true"
