@@ -1,9 +1,7 @@
-FROM node:16.13.0-alpine3.11@sha256:3b2e5a8932729c0dc561c9242c9a3c51d2101bdaff879689678a3d7febe8d08f
+FROM node:21.3.0-alpine3.18@sha256:3dab5cc219983a5f1904d285081cceffc9d181e64bed2a4a18855d2d62c64ccb as builder
 WORKDIR /usr/src/example-server
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN addgroup --gid 1427 appgroup && \
-    adduser --disabled-password --gecos '' --no-create-home -G appgroup --uid 1427 appuser
-USER appuser
+USER node
 CMD [ "npm", "start" ]
