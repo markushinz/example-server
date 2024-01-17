@@ -1,4 +1,4 @@
-FROM node:21.5.0-alpine3.18@sha256:6957aef644eecebcd8692f4b91b413b26d25a68c3dfbb6f20d29475d05c32473
+FROM node:21.6.0-alpine3.18@sha256:23be60db1056d6d2ef9ba528c923a7f84059344e52567d515b3e7fc70ff1340a
 WORKDIR /usr/src/example-server
 COPY package*.json ./
 RUN npm ci
