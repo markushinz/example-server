@@ -38,6 +38,9 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          platforms: |
+            linux/amd64
+            linux/arm64
           tags: |
             markushinz/example-server:v${{ env.VERSION }}
             markushinz/example-server:latest
