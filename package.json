@@ -1,11 +1,11 @@
 {
   "name": "example-server",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": true,
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "4.21.1"
+    "express": "4.21.2"
   }
 }
